@@ -28,3 +28,16 @@ export const deleteUserByName = (name) => {
 
   return 1;
 };
+
+export const findUserById = (id) => data.find((user) => user.id === id);
+
+export const userUpdate = (id, { name, job }) => {
+  const userIndex = data.findIndex((user) => user.id === id);
+
+  data[userIndex] = {
+    name: name || data[userIndex].name,
+    job: job || data[userIndex].job,
+  };
+
+  return data[userIndex];
+};

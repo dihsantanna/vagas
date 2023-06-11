@@ -3,7 +3,7 @@ import * as middlewares from "./middlewares.js";
 import * as teste1 from "./controllers/teste1.js";
 import * as teste2 from "./controllers/teste2.js";
 import * as teste3 from "./controllers/teste3.js";
-// import teste4 from "./controllers/teste4.js";
+import * as teste4 from "./controllers/teste4.js";
 // import teste5 from "./controllers/teste5.js";
 
 const app = express();
@@ -27,7 +27,7 @@ app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
 app.post("/users", teste2.createUser);
 app.delete("/users", teste3.deleteUser);
-// app.put("/users", teste4);
+app.put("/users", teste4.userUpdate);
 // app.get("/users/access", teste5);
 
 app.use(middlewares.middlewareError);

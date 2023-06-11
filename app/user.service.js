@@ -32,3 +32,15 @@ export const deleteUserByName = (name) => {
 
   return repository.deleteUserByName(name);
 };
+
+export const userUpdate = (id, { name, job }) => {
+  const user = repository.findUserById(id);
+
+  if (!user)
+    throw {
+      status: 404,
+      message: "Usuário não existe!",
+    };
+
+  return repository.userUpdate(id, { name, job });
+};
