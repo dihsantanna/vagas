@@ -18,3 +18,13 @@ export const createUser = ({ name, job }) => {
 
   return newUser;
 };
+
+export const deleteUserByName = (name) => {
+  const userIndex = data.findIndex(
+    (user) => user.name.toLowerCase() === name.toLowerCase()
+  );
+
+  data.splice(userIndex, 1);
+
+  return 1;
+};

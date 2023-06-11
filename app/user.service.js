@@ -20,3 +20,15 @@ export const getAllUsers = () => {
 export const createUser = ({ name, job }) => {
   return repository.createUser({ name, job });
 };
+
+export const deleteUserByName = (name) => {
+  const user = repository.getUserByName(name);
+
+  if (!user)
+    throw {
+      status: 404,
+      message: `Usuário "${name}" não foi encontrado em nosso registro!`,
+    };
+
+  return repository.deleteUserByName(name);
+};

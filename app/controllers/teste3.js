@@ -1,15 +1,14 @@
-// var data =  require("./fakeData");
+import * as service from "../user.service.js";
 
-// module.exports = function(req, res) {
+export const deleteUser = (req, res) => {
+  const { name } = req.query;
 
-//     var name =  req.query.name;
+  if (!name) {
+    res.status(400).json({ message: 'Query "name" é obrigatória!' });
+    return;
+  }
 
-//     for(let i = 0; i < data.length;  i++) {
-//         if(i.name == name) {
-//             data[i] = null;
-//         }
-//     }
+  const result = service.deleteUserByName(name);
 
-//     res.send("success");
-
-// };
+  res.status(200).json({ message: `Usuário ${name} excluído com sucesso!` });
+};
