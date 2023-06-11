@@ -1,7 +1,7 @@
 import express from "express";
-import * as teste1 from "./controllers/teste1.js";
 import * as middlewares from "./middlewares.js";
-// import * as teste2 from "./controllers/teste2.js";
+import * as teste1 from "./controllers/teste1.js";
+import * as teste2 from "./controllers/teste2.js";
 // import teste3 from "./controllers/teste3.js";
 // import teste4 from "./controllers/teste4.js";
 // import teste5 from "./controllers/teste5.js";
@@ -25,7 +25,7 @@ app.get("/", (_req, res) => {
 
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
-// app.post("/users", teste2.createUser);
+app.post("/users", teste2.createUser);
 // app.delete("/users", teste3);
 // app.put("/users", teste4);
 // app.get("/users/access", teste5);

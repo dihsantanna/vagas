@@ -1,15 +1,25 @@
-// var data = require("../../fakeData");
+import * as service from "../user.service.js";
 
-// module.exports = function (req, res) {
-//   var name = req.body.name;
-//   var jov = req.body.job;
+export const createUser = (req, res) => {
+  const { name, job } = req.body;
 
-//   var newUser = {
-//     name: name,
-//     job: job,
-//   };
+  if (!job || !name) {
+    res
+      .status(400)
+      .json({ message: 'Campos "name" e "job" são obrigatórios!' });
+    return;
+  } else if (typeof name !== "string") {
+    res.status(400).json({ message: 'Campo "name" deve ser uma string!' });
+    return;
+  } else if (typeof job !== "string") {
+    res.status(400).json({ message: 'Campo "job" deve ser uma string!' });
+    return;
+  }
 
-//   data.push(newUser);
+  const newUser = service.createUser({
+    name,
+    job,
+  });
 
-//   res.send(newUser);
-// };
+  res.status(201).json(newUser);
+};

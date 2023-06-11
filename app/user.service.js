@@ -16,3 +16,7 @@ export const getAllUsers = () => {
 
   return users;
 };
+
+export const createUser = ({ name, job }) => {
+  return repository.createUser({ name, job });
+};
