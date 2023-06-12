@@ -3,7 +3,13 @@ import * as repository from "./user.repository.js";
 export const getUserByName = (name) => {
   const user = repository.getUserByName(name);
 
-  if (user) return user;
+  if (user) {
+    const { countAccess, ...rest } = user;
+
+    repository.countAccessIncrement(rest.id);
+
+    return rest;
+  }
 
   throw {
     status: 404,
@@ -14,7 +20,9 @@ export const getUserByName = (name) => {
 export const getAllUsers = () => {
   const users = repository.getAllUsers();
 
-  return users;
+  repository.countAccessIncrementAll();
+
+  return users.map(({ countAccess, ...rest }) => rest);
 };
 
 export const createUser = ({ name, job }) => {
@@ -43,4 +51,17 @@ export const userUpdate = (id, { name, job }) => {
     };
 
   return repository.userUpdate(id, { name, job });
+};
+
+export const getUserAccessByName = (name) => {
+  const user = repository.getUserByName(name);
+
+  if (!user) {
+    throw {
+      status: 404,
+      message: `Usuário "${name}" não foi encontrado em nosso registro!`,
+    };
+  }
+
+  return repository.getUserAccessByName(name);
 };

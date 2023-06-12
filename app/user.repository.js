@@ -1,5 +1,25 @@
 import data from "../fakeData.js";
 
+export const countAccessIncrement = (id) => {
+  const userIndex = data.findIndex((user) => user.id === id);
+
+  if (userIndex === -1) return;
+
+  data[userIndex] = {
+    ...data[userIndex],
+    countAccess: data[userIndex].countAccess + 1,
+  };
+};
+
+export const countAccessIncrementAll = () => {
+  for (const userIndex in data) {
+    data[userIndex] = {
+      ...data[userIndex],
+      countAccess: data[userIndex].countAccess + 1,
+    };
+  }
+};
+
 export const getUserByName = (name) =>
   data.find((user) => user.name.toLowerCase() === name.toLowerCase());
 
@@ -12,6 +32,7 @@ export const createUser = ({ name, job }) => {
     id,
     name,
     job,
+    countAccess: 0,
   };
 
   data.push(newUser);
@@ -41,3 +62,7 @@ export const userUpdate = (id, { name, job }) => {
 
   return data[userIndex];
 };
+
+export const getUserAccessByName = (name) =>
+  data.find((user) => user.name.toLowerCase() === name.toLowerCase())
+    ?.countAccess;
