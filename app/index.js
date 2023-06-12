@@ -26,8 +26,8 @@ app.get("/", (_req, res) => {
 app.get("/user", teste1.getUser);
 app.get("/users", teste1.getUsers);
 app.post("/users", teste2.createUser);
-app.delete("/users", teste3.deleteUser);
-app.put("/users", teste4.userUpdate);
+app.delete("/users", middlewares.middlewareAuth, teste3.deleteUser);
+app.put("/users", middlewares.middlewareAuth, teste4.userUpdate);
 app.get("/users/access", teste5.getUserAccess);
 
 app.use(middlewares.middlewareError);

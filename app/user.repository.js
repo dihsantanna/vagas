@@ -56,6 +56,7 @@ export const userUpdate = (id, { name, job }) => {
   const userIndex = data.findIndex((user) => user.id === id);
 
   data[userIndex] = {
+    ...data[userIndex],
     name: name || data[userIndex].name,
     job: job || data[userIndex].job,
   };
